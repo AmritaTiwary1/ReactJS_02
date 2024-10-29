@@ -6,15 +6,14 @@ import {Button , Input , Logo} from './index'
 import { useDispatch } from 'react-redux'
 import {useForm} from 'react-hook-form'
 
-
 function Login() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const {register,handleSubmit} = useForm();
-    const [error, setError] = useState("");
+    const [error, setError] = useState(null);
     
-    const login = async(data) =>{
-        setError("");
+    const login = async(data) =>{      //This login is a fn which we will pass inside handlesubmit method of useForm, here, data is the value that is passed through {...register(email),{..}}
+        setError(""); //whenever we start process, remember to empty the error(btw, here, error value is already "")
         try{
             const session = await authService.login(data) //data contains login info-email,password,once we get session then.....we will get current user in userData variable ,and then......we will send(dispatch) it to store
            if(session){
@@ -30,9 +29,7 @@ function Login() {
     }
 
   return (
-    <div
-    className='flex items-center justify-center w-full'
-    >
+    <div className='flex items-center justify-center w-full'>
         <div className={`mx-auto w-full max-w-lg bg-gray-100 rounded-xl p-10 border border-black/10`}>
         <div className="mb-2 flex justify-center">
                     <span className="inline-block w-full max-w-[100px]">
@@ -50,15 +47,15 @@ function Login() {
                     </Link>
         </p>
         {error && <p className="text-red-600 mt-8 text-center">{error}</p>}
-         
 {/* Since we are using reacthook form ,it provides handlesubmit method, which takes a reference of a function, most importantly we always use to write handleSubmit as a fn in submit task, but here it takes reference of fn.  */}
        <form onSubmit={handleSubmit(login)} className='mt-8'>
          <div className='space-y-5'>
             <Input
                label='Email' 
-               placeholder='Enter Your Email'
+               placeholder='Enter Your Email'  //we can notice one thing -- in input.jsx compnent, it is not taking placeholder in parameter, butt since we have pass {...props}, so this will allow pl
                type='email'
 
+               //register 
                {...register('email' , {
                 required: true,
                 validate: {
@@ -67,9 +64,8 @@ function Login() {
                 }
                })}  
                ></Input>
-
 {/* In input field, we write {...register(uniqueName,object)} ,it is required bcoz reacthook form provide a register keyword,which takes a unique name of the input field & object which contain some options(eg.required:true..etc) , 
-and we are spreading it{...register}, bcoz login handleSubmit fn  is taking data,and that data is handle by {...register(uni..)}, and all the input values such as email,password should be spread, otherwise different input field will get affected(overwritten) by one another  */}
+and we are spreading it{...register}, bcoz login handleSubmit fn is taking data,and that data is handle by {...register(uni..)}, and all the input values such as email,password should be spread, otherwise different input field will get affected(overwritten) by one another  */}
 
                <input
                 label='Password: '

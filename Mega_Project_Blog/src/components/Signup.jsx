@@ -16,13 +16,13 @@ function Signup() {
     const create = async(data)=>{
       setError("");
       try{
-       const userData = await authService.createAccount(data)
-       if (userData) {
-       const userData = await authService.getCurrentUser();
-       if(userData) dispatch(storeLogin(userData));
-       navigate("/")
+       const userData = await authService.createAccount(data)   //data recieved from the form is used to create account
+       if (userData) {    //if createaccount return some value then do the below task
+       const userData = await authService.getCurrentUser();     //since createAccount only create a new account in database, we need all the info of user who is sign in , so we use getCurrentUser which return the info of that user which is signin in website through particular device
+       if(userData) dispatch(storeLogin(userData));  //once above fn return data, dispatch it in store so that home button will now show the info
+       navigate("/")  //  since in home, if user is not login ,then diffrent page will show, but the time when user logged in into web,it will render all the posts of the user that is stored in database
        }
-      } catch(error){
+      } catch(error){   //if error occur from above code, then--
           setError(error.message)
       }
     }
@@ -63,7 +63,7 @@ function Signup() {
                 {...register("email", {
                     required: true,
                     validate: {
-                        matchPatern: (value) => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value) ||
+                        matchPattern: (value) => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value) ||
                         "Email address must be a valid address",
                     }
                 })}
@@ -81,10 +81,8 @@ function Signup() {
             </div>
         </form>
     </div>
-
 </div>
-    
-  )
+ )
 }
 
 export default Signup

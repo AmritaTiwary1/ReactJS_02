@@ -16,7 +16,9 @@ export class DatabaseService{
 
     }
 
-    async createPost({title,slug,content,featuredImage,status,userId}){  //slug is document id
+    //fn related to Document in database takes parameters like - appwriteDatabaseId , collectionId , slug(particular id) and .......
+
+    async createPost({title,slug,content,featuredImage,status,userId}){  //slug is document id ,featured img dont contain real img,it is url/id, real img is stored in storage/bucket of appwrite, createPost is fn which we have made in which we are taking title,content,featured_img,etc. and then calling a fn of appwrite -createdocument
         try{
             return await this.databases.createDocument(    //what is need of "return"
                 conf.appwriteDatabaseId,
@@ -38,7 +40,7 @@ export class DatabaseService{
         };
     }
 
-    async updatePost(slug,{title,content,featuredImage,status,userId}){
+    async updatePost(slug,{title,content,featuredImage,status,userId}){ //updatePost take parameter where slug(id) is taken & the new value(replaced) is also taken, and in database,when slug is matched with document_id , then the value inside that document get replaced with the new one
         try{
              return await this.databases.updateDocument(
                 conf.appwriteDatabaseId,
@@ -68,7 +70,7 @@ export class DatabaseService{
 
             } catch (error) {
                 console.log("Appwrite service :: deletePost :: error",error);
-                return false;m
+                return false;
             }
     }
 
@@ -86,13 +88,15 @@ export class DatabaseService{
         }
     }
 
-    async getPosts(queries = [Query.equal("status","active")]){
+    async getPosts(queries = [Query.equal("status","active")]){ //we can define variable in parameter section too
         try {
             return await this.databases.listDocuments(
                 conf.appwriteDatabaseId,
                 conf.appwriteCollectionId,
-                queries, //or without defining query in parameter, we can directly write --
+                queries, //or if we dont write query her,then without defining query in parameter, we can directly write --
                 //  [Query.equal("status","active")]
+          
+                //query.limit(20)----we can even control how much document we want (100,200,10,20...etc)
             )
      } catch (error) {
             console.log("Appwrite service :: getPosts :: error",error);
@@ -103,7 +107,7 @@ export class DatabaseService{
     // file upload services  --- it will contain featured image info. , from this,we will give value to featuredImage in createPost fn
     async uploadFile(file){
        try {
-         return await this.bucket.createFile(
+         return await this.bucket.createFile(    // bucket is storage of appwrite, all the text content is stored in database ,but the file content(img) use storage of appwrite
             conf.appwriteBucketId,
             ID.unique(),
             file
@@ -128,7 +132,7 @@ export class DatabaseService{
         }
     }
 
-    getFilePreview(fileId){ //-----> image will be seen small in size
+    getFilePreview(fileId){ //-----> image will be seen small in size , this fn is provided by appwrite
         return this.bucket.getFilePreview(
             conf.appwriteBucketId,
             fileId

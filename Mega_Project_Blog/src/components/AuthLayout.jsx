@@ -27,9 +27,9 @@ export default function Protected({
         
 //If below code is hard to understand then ignore authentication word, see above code 
 
-        if(authentication && authStatus!==authentication ){
+        if(!authentication && authStatus==authentication ){
             navigate('/login')
-      } else if(!authentication && authStatus!==authentication) {
+      } else if(authentication && authStatus==authentication) {
             navigate('/')
       }
       setLoader(false)

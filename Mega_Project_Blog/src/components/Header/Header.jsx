@@ -10,7 +10,7 @@ function Header() {
   const authStatus = useSelector((state)=> state.auth.status)
   const navigate = useNavigate() // now,if someone write btn onclick=navigate('/about),then it will open that page/element(using react-router-dom)
 
-  const navItems =[
+  const navItems =[   //we have made an array so that inside return-- we'll just run loop on navitems and show all the navbar items
   {
       name:'Home',
       slug:'/', // instead of slug, we can write anything i.e-url:'/' orr link:'/'
@@ -47,17 +47,19 @@ return (
               <Logo width='70px'  /> 
           </Link>
         </div>
-        <ul className='flex ml-auto'>
-          {navItems.map((item)=>{
+       <ul className='flex ml-auto'>    {/* If user is logged in, then show allpost,add post btn else only show home,login,signup btn */}
+          {navItems.map((item)=>{    //we can also write each button individually eg.--- authService?  <li> button<logout>  </li>  : <li> button Login</li> -----> if authStatus is true , it means user has logged in,then show allpost,addpost,logout & no need to show LOGIN/SIGNUP btn , if authstsatus is false, show login,signup btn
             item.active?(
               <li key={item.name}>
                 <button
                 className='inline-block px-6 py-2 duration-200 hover:bg-blue-100 rounded-full'
-                 onClick={()=> navigate(item.slug)}
+                 onClick={()=> navigate(item.slug)}  
                 > {item.name}</button>
               </li>
             ):null
           })}
+
+          
         {authStatus && (
           <li>
             <LogoutBtn/>

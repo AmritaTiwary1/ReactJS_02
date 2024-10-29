@@ -1,7 +1,7 @@
 import { forwardRef } from "react"  //THIS IS ONE WAY TO USE FORWARD REF, ANOTHER & COMMON WAY IS USE REF IS IN INPUT.JSX
 import React,{useId} from 'react'
 
-function Select({
+function Select({   //when we use forwardref , we have to pass it to functions as arguments
     options,
     label,
     className, //or className="", if user dont pass classname ,then empty string will manage everything
@@ -29,4 +29,4 @@ function Select({
   )
 }
 
-export default forwardRef(Select)
+export default forwardRef(Select)  //instead of wrapping the whole select fn inside forwardref(as we did in input.jsx) , we can also wrap select while exporting it(as we did in this (select.jsx))
