@@ -1,5 +1,5 @@
 import React from 'react'
-import {Login as LoginComponent} from '../components/Login.jsx'
+import {Login as LoginComponent} from '../components/index'
 function Login() {
   return (
     <div className='py-8'>
@@ -9,3 +9,5 @@ function Login() {
 }
 
 export default Login
+
+

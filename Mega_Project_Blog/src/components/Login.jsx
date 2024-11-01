@@ -2,11 +2,11 @@ import React,{useState} from 'react'
 import { Link , useNavigate } from 'react-router-dom'
 import {login as storeLogin} from '../store/authSlice'
 import authService from '../appwrite/auth'
-import {Button , Input , Logo} from './index'
+import {Button , Input , Logo } from './index'
 import { useDispatch } from 'react-redux'
 import {useForm} from 'react-hook-form'
 
-function Login() {
+export default function Login() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const {register,handleSubmit} = useForm();
@@ -67,12 +67,12 @@ function Login() {
 {/* In input field, we write {...register(uniqueName,object)} ,it is required bcoz reacthook form provide a register keyword,which takes a unique name of the input field & object which contain some options(eg.required:true..etc) , 
 and we are spreading it{...register}, bcoz login handleSubmit fn is taking data,and that data is handle by {...register(uni..)}, and all the input values such as email,password should be spread, otherwise different input field will get affected(overwritten) by one another  */}
 
-               <input
+               <Input
                 label='Password: '
                 placeholder='Enter Your Password'
                 type='Password'
                 {...register('password',{
-                    required: true
+                    required: true,
                 })}
                />
                <Button
@@ -87,6 +87,6 @@ and we are spreading it{...register}, bcoz login handleSubmit fn is taking data,
   )
 }
 
-export default Login
-
 //If we hadnt used useForm in this jsx, then we have to use useState to hanle email,password,etc. but since we are using useform , thatswhy register keyword of useForm is handling email,pswrd,etc.   
+
+

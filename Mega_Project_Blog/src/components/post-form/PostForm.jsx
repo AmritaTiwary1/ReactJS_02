@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Button, Input, RTE, Select } from "../index";
 import appwriteService from "../../appwrite/config";
@@ -15,6 +15,7 @@ export default function PostForm({ post }) {
         },  
     });
 
+    const [load,setLoad]=useState(false)
     const navigate = useNavigate();
     const userData = useSelector((state) => state.auth.userData);
 
@@ -122,3 +123,5 @@ export default function PostForm({ post }) {
         </form>
     );
 }
+
+

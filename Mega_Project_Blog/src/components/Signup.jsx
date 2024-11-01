@@ -8,8 +8,8 @@ import {login as storeLogin} from '../store/authSlice.js'
 
 function Signup() {
          
-    dispatch = useDispatch();
-    navigate = useNavigate();
+   const dispatch = useDispatch();
+   const navigate = useNavigate();
     const {register,handleSubmit} = useForm();
     const [error, setError] = useState(null);
 
@@ -87,6 +87,8 @@ function Signup() {
 
 export default Signup
 
-//If we hadnt used useForm in this jsx, then we have to use useState to handle email,password,etc. but since we are using useform ,
-// thatswhy register keyword of useForm is handling email,pswrd,etc. One thing to note --- register keyword syntax contains name attribute,
-// which helps to spread the data properly(by name)in the object 
+// //If we hadnt used useForm in this jsx, then we have to use useState to handle email,password,etc. but since we are using useform ,
+// // thatswhy register keyword of useForm is handling email,pswrd,etc. One thing to note --- register keyword syntax contains name attribute,
+// // which helps to spread the data properly(by name)in the object 
+
+

@@ -4,9 +4,7 @@ import {Container,Logo,LogoutBtn} from '../index'
 import {Link} from 'react-router-dom'
 import { useNavigate } from 'react-router-dom' //navigate or link(to="/about") do the same thing
 
-  
-
-function Header() {
+  function Header() {
   const authStatus = useSelector((state)=> state.auth.status)
   const navigate = useNavigate() // now,if someone write btn onclick=navigate('/about),then it will open that page/element(using react-router-dom)
 
@@ -18,7 +16,7 @@ function Header() {
   },
   {
       name:'Login',
-      slug:'/Login', 
+      slug:'/login', 
       active:!authStatus
   },
   {
@@ -39,7 +37,7 @@ function Header() {
 ]
 
 return (
-   <Header classname="bg-gray-500 py-3">
+   <header classname="bg-gray-500 py-3">
      <Container>
        <nav className='flex' >
         <div className='mr-4'>
@@ -48,7 +46,7 @@ return (
           </Link>
         </div>
        <ul className='flex ml-auto'>    {/* If user is logged in, then show allpost,add post btn else only show home,login,signup btn */}
-          {navItems.map((item)=>{    //we can also write each button individually eg.--- authService?  <li> button<logout>  </li>  : <li> button Login</li> -----> if authStatus is true , it means user has logged in,then show allpost,addpost,logout & no need to show LOGIN/SIGNUP btn , if authstsatus is false, show login,signup btn
+          {navItems.map((item)=> (  //we can also write each button individually eg.--- authService?  <li> button<logout>  </li>  : <li> button Login</li> -----> if authStatus is true , it means user has logged in,then show allpost,addpost,logout & no need to show LOGIN/SIGNUP btn , if authstsatus is false, show login,signup btn
             item.active?(
               <li key={item.name}>
                 <button
@@ -57,10 +55,9 @@ return (
                 > {item.name}</button>
               </li>
             ):null
-          })}
+  ))}
 
-          
-        {authStatus && (
+      {authStatus && (
           <li>
             <LogoutBtn/>
           </li>
@@ -69,9 +66,10 @@ return (
        </nav>
      </Container>
 
-   </Header>
+   </header>
 
   )
 }
 
 export default Header
+

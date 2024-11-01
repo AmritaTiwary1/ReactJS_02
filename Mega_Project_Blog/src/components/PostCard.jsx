@@ -18,3 +18,6 @@ function PostCard({$id,title,featuredImage}) {    //$id is appwrite way to write
 }
 
 export default PostCard
+
+
+
