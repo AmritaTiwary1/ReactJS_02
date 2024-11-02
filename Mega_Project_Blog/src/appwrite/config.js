@@ -18,7 +18,7 @@
 
 //     //fn related to Document in database takes parameters like - appwriteDatabaseId , collectionId , slug(particular id) and .......
 
-//     async createPost({title,slug,content,featuredImage,status,userId}){  //slug is document id ,featured img dont contain real img,it is url/id, real img is stored in storage/bucket of appwrite, createPost is fn which we have made in which we are taking title,content,featured_img,etc. and then calling a fn of appwrite -createdocument
+//     async createPost({title,slug,content,featured_image,status,userId}){  //slug is document id ,featured img dont contain real img,it is url/id, real img is stored in storage/bucket of appwrite, createPost is fn which we have made in which we are taking title,content,featured_img,etc. and then calling a fn of appwrite -createdocument
 //         try{
 //             return await this.databases.createDocument(    //what is need of "return"
 //                 conf.appwriteDatabaseId,
@@ -27,7 +27,7 @@
 //                 {
 //                     title,
 //                     slug,
-//                     content,featuredImage,
+//                     content,featured_image,
 //                     status,
 //                     userId,
 //                 }
@@ -40,7 +40,7 @@
 //         };
 //     }
 
-//     async updatePost(slug,{title,content,featuredImage,status,userId}){ //updatePost take parameter where slug(id) is taken & the new value(replaced) is also taken, and in database,when slug is matched with document_id , then the value inside that document get replaced with the new one
+//     async updatePost(slug,{title,content,featured_image,status,userId}){ //updatePost take parameter where slug(id) is taken & the new value(replaced) is also taken, and in database,when slug is matched with document_id , then the value inside that document get replaced with the new one
 //         try{
 //              return await this.databases.updateDocument(
 //                 conf.appwriteDatabaseId,
@@ -49,7 +49,7 @@
 //                 {
 //                     title,
 //                     content,
-//                     featuredImage,
+//                     featured_image,
 //                     status
 //                 }
 //              )  
@@ -104,7 +104,7 @@
 //         }
 //     }
 
-//     // file upload services  --- it will contain featured image info. , from this,we will give value to featuredImage in createPost fn
+//     // file upload services  --- it will contain featured image info. , from this,we will give value to featured_image in createPost fn
 //     async uploadFile(file){
 //        try {
 //          return await this.bucket.createFile(    // bucket is storage of appwrite, all the text content is stored in database ,but the file content(img) use storage of appwrite
@@ -161,7 +161,7 @@ export class Service{
         this.bucket = new Storage(this.client);
     }
 
-    async createPost({title, slug, content, featuredImage, status, userId}){
+    async createPost({title, slug, content, featured_image, status, userId}){
         try {
             return await this.databases.createDocument(
                 conf.appwriteDatabaseId,
@@ -170,7 +170,7 @@ export class Service{
                 {
                     title,
                     content,
-                    featuredImage,
+                    featured_image,
                     status,
                     userId,
                 }
@@ -180,7 +180,7 @@ export class Service{
         }
     }
 
-    async updatePost(slug, {title, content, featuredImage, status}){
+    async updatePost(slug, {title, content, featured_image, status}){
         try {
             return await this.databases.updateDocument(
                 conf.appwriteDatabaseId,
@@ -189,7 +189,7 @@ export class Service{
                 {
                     title,
                     content,
-                    featuredImage,
+                    featured_image,
                     status,
 
                 }

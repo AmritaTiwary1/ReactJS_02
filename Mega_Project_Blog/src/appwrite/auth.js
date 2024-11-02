@@ -86,14 +86,14 @@ export class AuthService {
             } else {
                return  userAccount;
             }
-        } catch (error) {
+        } catch (error) { 
             throw error;
         }
     }
 
     async login({email, password}) {
         try {
-            return await this.account.createEmailSession(email, password);
+            return await this.account.createEmailPasswordSession(email, password);
         } catch (error) {
             throw error;
         }

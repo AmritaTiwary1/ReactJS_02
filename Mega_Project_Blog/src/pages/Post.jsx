@@ -26,7 +26,7 @@
 //     const deletePost = () => {
 //         appwriteService.deletePost(post.$id).then((status) => {
 //             if (status) {
-//                 appwriteService.deleteFile(post.featuredImage);
+//                 appwriteService.deleteFile(post.featured_image);
 //                 navigate("/");
 //             }
 //         });
@@ -37,7 +37,7 @@
 //             <Container>
 //                 <div className="w-full flex justify-center mb-4 relative border rounded-xl p-2">
 //                     <img
-//                         src={appwriteService.getFilePreview(post.featuredImage)}  //it will return url of img
+//                         src={appwriteService.getFilePreview(post.featured_image)}  //it will return url of img
 //                         alt={post.title}
 //                         className="rounded-xl"
 //                     />
@@ -95,7 +95,7 @@ export default function Post() {
     const deletePost = () => {
         appwriteService.deletePost(post.$id).then((status) => {
             if (status) {
-                appwriteService.deleteFile(post.featuredImage);
+                appwriteService.deleteFile(post.featured_image);
                 navigate("/");
             }
         });
@@ -106,7 +106,7 @@ export default function Post() {
             <Container>
                 <div className="w-full flex justify-center mb-4 relative border rounded-xl p-2">
                     <img
-                        src={appwriteService.getFilePreview(post.featuredImage)}
+                        src={appwriteService.getFilePreview(post.featured_image)}
                         alt={post.title}
                         className="rounded-xl"
                     />

@@ -37,7 +37,7 @@ import { useNavigate } from 'react-router-dom' //navigate or link(to="/about") d
 ]
 
 return (
-   <header classname="bg-gray-500 py-3">
+   <header className="bg-gray-500 py-3">
      <Container>
        <nav className='flex' >
         <div className='mr-4'>
